@@ -35,10 +35,10 @@ class Person:
 
 
 class Customer(Person):
-    #do i need to put class in parameter/argument ?
-    def __init__(self, sName):
+    #include order in paramenter?
+    def __init__(self, sName, Order):
         super().__init__(sName)
-        self.Order = oOrder 
+        self.Order = oOrder
         self.dictCustomers = {}
         
     #CREATE a variable for a Queue that will 
