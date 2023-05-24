@@ -1,3 +1,3 @@
-#Hailey Bronson, Nate Sibbett, Harrison Stone, enter names 
+#Hailey Bronson, Nate Sibbett, Harrison Stone, Claire Woodman enter names 
 #this program... 
 
