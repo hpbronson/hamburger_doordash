@@ -1,5 +1,5 @@
 # hamburger_doordash
-IS 303 Group Project
+# IS 303 Group Project
 #Hailey Bronson, Nate Sibbett, Harrison Stone, Caleb Barlow, Claire Woodman
 #Hamburger Door Dash
 #this program tracks exactly how many hamburgers each customer eats
@@ -75,16 +75,18 @@ def main():
 
 
     #create new dict that is sorted by referancing and manipulating current dictionary 
-    SortedDict = dict(sorted(Customerdict.items(), key = lambda item : item[1], reverse = True))
-
-    #Print out each customer and their total burgers ordered sorted by the most number of
-    #burgers ordered
+    SortedDict = sorted(Customerdict.items(), key = lambda item : item[1], reverse = True)
+    # Print out each customer and their total burgers ordered sorted by the most number of
+    # burgers ordered
     for customer in SortedDict:
-        #the key and value treat as one entity, so reference customer 
-        print(f'{customer} ate {SortedDict[customer]} burgers.')
+
+        customer_name = customer[0]
+        total_burgers = customer[1]
+        formatted_name = customer_name.ljust(19)
+
+        print(f"{formatted_name}     {total_burgers}")
+
 
 #calling main to have it run       
 main()
-
-
  
