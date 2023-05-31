@@ -1,93 +1,91 @@
-#my own version of the group project in order to understand 
+# hamburger_doordash
+# IS 303 Group Project
+#Hailey Bronson, Nate Sibbett, Harrison Stone, Caleb Barlow, Claire Woodman
+#Hamburger Door Dash
+#this program tracks exactly how many hamburgers each customer eats
+
 import random 
-from collections import deque
 
-class Order: 
+#Create an Order class
+class Order(): 
+    #Create a constructor that defines 
+    # an instance variable called burger_count
+    def __init__(self):
+        self.burger_count = self.randomBurgers()
 
-    def __init__(self, burgerCount):
-        self.burger_count = int(burgerCount)
-        self.randomBurgers(burgerCount)
-
-    #TA: declare separate variable? or mention method  
+    #Create a method called randomBurgers 
+    # that returns a number between 1 and 20
     def randomBurgers(self):
-        #keep method now that we have declared the variable? 
-        self.burgerCount = random.randint(0, 20)
+        return random.randint(1, 20)
+    
+    #The constructor should call the randomBurgers() method and assign the return
+    #value to the burger_count instance variable
 
-class Person: 
-    def __init__(self, sName):
-        self.customer_name = sName 
+#Create a Person class
+class Person(): 
+        #Create a constructor that defines 
+        # an instance variable called customer_name
+        def __init__(self):
+            self.customer_name = self.randomName()
 
-# THE PERSON constructor should call the randomName() 
-# method and assign the return value (a random name) to the 
-# customer_name instance variable
-        self.randomName(sName)
-
-    def randomName(self):
-        asCustomers = ["Jefe", "El Guapo", "Lucky Day", "Ned Nederlander", 
+        def randomName(self): 
+            #Make changes to customer list here
+            asCustomers = ["Jefe", "El Guapo", "Lucky Day", "Ned Nederlander", 
                        "Dusty Bottoms", "Harry Flugleman", "Carmen", 
                        "Invisible Swordsman", "Singing Bush"]
-        #returns random name from list
-        self.sName = random.choice(asCustomers)
-        
-
-#parent: Person child: Customer 
+            return random.choice(asCustomers)
+        #This method randomly returns one of the 9 names when called
+        #The Person constructor should call the randomName() method and assign the
+        #return value (a random name) to the customer_name instance variable
+    
+#Create a Customer class that inherits from the Person class
 class Customer(Person):
-    #do i need to put class in parameter/argument ?
-    def __init__(self, sName):
-        super().__init__(sName)
-        self.Order = oOrder 
-        self.dictCustomers = {}
+    #Create a constructor that calls the parent constructor
+    def __init__(self):
+        super().__init__()
+        #Create an instance variable called order in the 
+        #constructor that is assigned an order object
+        self.order = Order()
 
- #CREATE a variable for a Queue that will 
-    # be assigned items of type Customer 
-        self.queueCustomer = ()
+    #Create a variable for a Queue that will be assigned 
+    #items of type Customer
 
-    def add_to_queue(line): 
-        #TA: for loop to add 100 customers into the queue? 
-        # is there another way to add Customers? ("Customer 1", "Customer 2")
-        # append() function to push item at top of the stack
+#working outside of the realm of the classes we instantiated so define method main 
+def main():
+    Customerqueue = []
+    #This variable will represent your line of customers (objects) waiting outside to
+    #place their hamburger orders
 
-        queueCustomers.append("Customer 1") 
-        queueCustomers.append("Customer 2")
-        queueCustomers.append("Customer 3")
-        queueCustomers.append("Customer 4")
-            
+    #Create a variable for a Dictionary with keys of type string and values of type int.
+    Customerdict = {}
+    #This variable will hold information about each customer
+
+    #Put 100 customers into the queue. Each customer object will already have a random
+    #number of burgers for each order
+    for customer in range(100):
+        #by referencing the entire class, it will reference the class, then the super() function, and then grab 
+        #the customer name and burger count, ultimately creating objects as it goes 
+        Customerqueue.append(Customer())
         
-        #Start at the bottom element or the First one (oldest) added
-        for iCount in range(0, len(queueCustomers)) :
-            print(queueCustomers[iCount])
-        
-        #The FIRST one added will be the FIRST one out
-        for iCount in range(1, len(queueCustomers) + 1) :
-            queueCustomers.popleft()
-        
-            for iCount in range(0, len(queueCustomers)) :
-                print(queueCustomers[iCount])
-        
-        print("\nThere are no more customers to help")  
+    for customer in Customerqueue: 
+        if customer.customer_name in Customerdict: 
+            Customerdict[customer.customer_name] += customer.order.burger_count
+        else: 
+            Customerdict[customer.customer_name] = customer.order.burger_count 
 
 
+    #create new dict that is sorted by referancing and manipulating current dictionary 
+    SortedDict = sorted(Customerdict.items(), key = lambda item : item[1], reverse = True)
+    # Print out each customer and their total burgers ordered sorted by the most number of
+    # burgers ordered
+    for customer in SortedDict:
 
-    #input for the dictionary 
-        for customer in queueCustomers:
-            Customer.dictCustomers[Person.customer_name] = Order.burger_count
+        customer_name = customer[0]
+        total_burgers = customer[1]
+        formatted_name = customer_name.ljust(19)
 
-        if Person.customer_name not in Customer.dictCustomers:
-            Customer.dictCustomers[Person.customer_name] = Order.burger_count
-        else:
-            #FIGURE OUT
-            Customer.dictCustomers[Person.customer_name] = Order.burger_count
+        print(f"{formatted_name}     {total_burgers}")
 
 
-oOrder = Order("")
-oCustomer = Customer("")
-queueCustomers = deque()
-
-#returning sorted list of customers from the dictionary 
-listSortedCustomers = sorted(Customer.dictCustomers.items(), key=lambda x: x[1], reverse=True)
-
-#NOW display the customer name and the total number of burgers consumed. 
-# Do this using a for loop displaying the contents of the list in positions 0 and 1. 
-
-#MAKE the customer name an even sized value using the ljust() function with the value of 
-#19 as the parameter like customer[0].ljust(19) where customer is each list item object in the for loop.
+#calling main to have it run       
+main()
